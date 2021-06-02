@@ -118,7 +118,16 @@ screen_buffer: array[1000] of byte;
 	begin
 		
 		
-		sdes := #screen_buffer+(y*40)+x;	
+		sdes := #screen_buffer+(y*40)+x;
+
+		if (sdes[5]<>$20 or sdes[45]<>$20) then begin
+			
+			ALIVE:=0;
+			WON_GAME:=0;	
+
+			
+		end;
+	
 		MemCpy(#ship, 0, sdes, 5 ); 
 		sdes := sdes+40;
 		MemCpy(#ship, 5, sdes, 5 );
@@ -165,49 +174,81 @@ screen_buffer: array[1000] of byte;
 			
 		
 	end;
-
-/* main program */  
-begin
-
-
-
-
-	txt::cls();
-	txt::print_string("PET TEST", True);
-
-
-	init_screen();
-	sx:=0;
-	sy:=4;
-	x:=0;
-	y:=10;
 	
 	
-	// The screen updates but no keyboard so disable
-	//setup_irq();
+	procedure start_screen();
+	begin
 	
-	ALIVE:=1;
-	WON_GAME:=0;
-
+		txt::cls();
+		txt::move_to(10,10);
+		txt::print_string("PET-TYPE 2021", False);
 	
-	// Numeric Keypad
-	n_key_up:=Key::K8;
-	n_key_down:=Key::K5;
-	n_key_left:=Key::K4;
-	n_key_right:=Key::K6;
+		txt::clear_buffer();
+		txt::wait_key();
 	
-	// Regular keys        
-	key_up:=Key::KW;
-	key_down:=Key::KS;
-	key_left:=Key::KA;
-	key_right:=Key::KD;
-
-
-	while (ALIVE=1 and WON_GAME=0) do
+	end;
+	
+	procedure end_screen();
 	begin
 
+		if WON_GAME then 
+		begin
 		
+			txt::cls();
+			txt::move_to(10,10);
+			txt::print_string("YOU WIN!", False);
 
+		end
+		else
+		begin
+			
+			txt::cls();
+			txt::move_to(10,10);
+			txt::print_string("YOU LOSE!", False);
+
+		
+		end;
+
+		txt::clear_buffer();
+		txt::wait_key();
+		
+	end;
+	
+	procedure init_game();
+	begin
+	
+		init_screen();
+		sx:=0;
+		sy:=4;
+		x:=0;
+		y:=10;
+		
+		
+		// The screen updates but no keyboard so disable
+		//setup_irq();
+		
+		ALIVE:=1;
+		WON_GAME:=0;
+	
+		
+		// Numeric Keypad
+		n_key_up:=Key::K8;
+		n_key_down:=Key::K5;
+		n_key_left:=Key::K4;
+		n_key_right:=Key::K6;
+		
+		// Regular keys        
+		key_up:=Key::KW;
+		key_down:=Key::KS;
+		key_left:=Key::KA;
+		key_right:=Key::KD;
+		
+	end;
+	
+	procedure main_loop();
+	begin
+		
+		
 		// Andy's keyboard routine
 		// doesn't work with IRQ :(
 		Key::Read();
@@ -253,9 +294,27 @@ begin
         Screen_WaitVblStart();
         draw_frame();
         Screen_WaitVblEnd();
-		
 	end;
 
+/* main program */  
+begin
+
+	while (1) do begin
+		
+		init_game();
+		start_screen();
+		
+		while (ALIVE=1 and WON_GAME=0) do
+		begin
+	
+			// where the magic happens	
+			main_loop();
+			
+		end;
+		
+		end_screen();
+		
+	end;
 end.
 
 
