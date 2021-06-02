@@ -9,6 +9,7 @@ program PET40;
 
 var
 	@define useKernal 0
+	ticks: byte;
 	i,s,c,a,key_press,ALIVE,WON_GAME: byte;
 	x,y,old_x,old_y: byte;
 	sx,sy: integer;
@@ -56,7 +57,6 @@ map: array[9600] of byte = (
 
 
 
-
 	procedure init_screen();
 	begin
 		map_p:=#map;
@@ -64,16 +64,49 @@ map: array[9600] of byte = (
 
 	end;
 	
+
+	procedure draw_line(i: global byte) inline;
+	begin
+		
+		des:=txt::ytab[i];	
+		MemCpyFast(map_p, 0, des, 40 );
+		map_p:=map_p+400; 
+		
+	end;
+
+	
 	procedure draw_screen();
 	begin
 
-		map_p:=#map+sx;	
-		for i:=0 to 24 do begin
-			des:=txt::ytab[i];	
-			MemCpyFast(map_p, 0, des, 40 );
-			map_p:=map_p+400; 
-		end;
-		
+		map_p:=#map+sx;
+
+		// Semi-"Unrolled" for extra speed	
+		draw_line(0);
+		draw_line(1);
+		draw_line(2);
+		draw_line(3);
+		draw_line(4);
+		draw_line(5);
+		draw_line(6);
+		draw_line(7);
+		draw_line(8);
+		draw_line(9);
+		draw_line(10);
+		draw_line(11);
+		draw_line(12);
+		draw_line(13);
+		draw_line(14);
+		draw_line(15);
+		draw_line(16);
+		draw_line(17);
+		draw_line(18);
+		draw_line(19);
+		draw_line(20);
+		draw_line(21);
+		draw_line(22);
+		draw_line(23);
+
+			
 		txt::put_dec_at(30,24,y);
 		txt::put_dec_at(0,24,sx);
 		
@@ -99,23 +132,19 @@ map: array[9600] of byte = (
 	procedure draw_frame();
 	begin	
 
+		incrange(ticks,0,100);
 	
 		// This will run approx 60hz so we need to figure out vertical blank
-		if (getbit(^$e840,5)) then			  
-		begin
-
-			incrange(a,0,360);
-			if (a=1) then
-			begin 
-				sx:=sx+1;
-				if sx=400 then sx:=0;
-				draw_screen();
-			end;	
-			draw_ship();			
+		// Bit 5 is high when vertical retrace in effect
+		if mod(ticks,10) then begin 
+			
+			//incrange(sx,0,400);
+			inc(sx);
+			if sx=400 then sx:=0;
+			
+			draw_screen();	
 		end;
-		
-		// Return control to regular programming	
-		asm("	jmp (org_ad)");	
+		draw_ship();			
 		
 	end;
 	
@@ -153,7 +182,9 @@ begin
 	y:=10;
 	
 	
-	setup_irq();
+	// The screen updates but no keyboard so disable
+	//setup_irq();
+	
 	ALIVE:=1;
 	WON_GAME:=0;
 
@@ -176,8 +207,9 @@ begin
 
 		
 
+		// Andy's keyboard routine
+		// doesn't work with IRQ :(
 		Key::Read();
-
 
 
         old_x:=x;
@@ -216,7 +248,10 @@ begin
         end;
         
         
-        //draw_frame();
+        // until the IRQ works will need to update screen here
+        Screen_WaitVblStart();
+        draw_frame();
+        Screen_WaitVblEnd();
 		
 	end;
 
