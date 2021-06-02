@@ -123,7 +123,7 @@ map: array[9600] of byte = (
 					
 	begin
 		
-		org_ad:=(hi(irq_ad)*256)+lo(irq_ad);
+		org_ad:=createinteger(hi(irq_ad),lo(irq_ad));
 		//org_ad:=irq_ad;	
 		new_ad:=#draw_frame();
 					
@@ -151,7 +151,7 @@ begin
 	y:=10;
 	
 	
-	//setup_irq();
+	setup_irq();
 	ALIVE:=1;
 	WON_GAME:=0;
 
@@ -214,7 +214,7 @@ begin
         end;
         
         
-        draw_frame();
+        //draw_frame();
 		
 	end;
 

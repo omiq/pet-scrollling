@@ -67,3 +67,6 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+.backup/main.ras/backup_Tue Jun 1 12_11_21 2021.bak
+*.bak
+*.bak
