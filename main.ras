@@ -123,9 +123,10 @@ map: array[9600] of byte = (
 	var
 					
 	begin
+
+		// doesn't work --> org_ad:=createinteger(peek(^$91,0),peek(^$90,0));
+		org_ad:=(hi(irq_ad)*256)+lo(irq_ad);		
 		
-		// this doesn't work? -> org_ad:=createinteger(hi(irq_ad),lo(irq_ad));
-		org_ad:=(hi(irq_ad)*256)+lo(irq_ad);
 		new_ad:=#draw_frame();
 					
 		asm("	sei	");
