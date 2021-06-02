@@ -114,8 +114,8 @@ map: array[9600] of byte = (
 			draw_ship();			
 		end;
 		
-		// Return control to regular programming
-		call(org_ad);	
+		// Return control to regular programming	
+		asm("	jmp (org_ad)");	
 		
 	end;
 	
@@ -124,8 +124,7 @@ map: array[9600] of byte = (
 					
 	begin
 		
-		org_ad:=createinteger(hi(irq_ad),lo(irq_ad));
-		//org_ad:=irq_ad;	
+		org_ad:=(hi(irq_ad)*256)+lo(irq_ad);
 		new_ad:=#draw_frame();
 					
 		asm("	sei	");
