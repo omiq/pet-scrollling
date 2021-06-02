@@ -100,8 +100,7 @@ map: array[9600] of byte = (
 	begin	
 
 	
-		
-
+		// This will run approx 60hz so we need to figure out vertical blank
 		if (getbit(^$e840,5)) then			  
 		begin
 
@@ -115,7 +114,9 @@ map: array[9600] of byte = (
 			draw_ship();			
 		end;
 		
-		//asm("	jmp (org_ad)");	
+		// Return control to regular programming
+		call(org_ad);	
+		
 	end;
 	
 	procedure setup_irq();

@@ -14,7 +14,7 @@ EndBlock401
 	; Starting new memory block at $410
 StartBlock410
 PET40
-	; LineNumber: 138
+	; LineNumber: 140
 	jmp block1
 	; LineNumber: 5
 txt_temp_address_p	= $68
@@ -2492,47 +2492,51 @@ draw_frame_elsedoneblock243
 	jsr draw_ship
 	; LineNumber: 116
 draw_frame_elsedoneblock214
-	; LineNumber: 119
-	rts
+	; LineNumber: 118
 	
-; //asm("	jmp(org_ad)");	
+; // Return control to regular programming
+	; integer assignment NodeVar
+	ldy org_ad+1 ; keep
+	lda org_ad
+	; LineNumber: 121
+	rts
 	; NodeProcedureDecl -1
 	; ***********  Defining procedure : setup_irq
 	;    Procedure type : User-defined procedure
-	; LineNumber: 124
-setup_irq
 	; LineNumber: 126
+setup_irq
+	; LineNumber: 128
 	ldy irq_ad+1 ; optimized, look out for bugs
 	lda irq_ad
 	; Calling storevariable on generic assign expression
 	sta org_ad
 	sty org_ad+1
-	; LineNumber: 128
+	; LineNumber: 130
 	
 ; //org_ad:=irq_ad;	
 	lda #<draw_frame
 	ldy #>draw_frame
 	sta new_ad
 	sty new_ad+1
-	; LineNumber: 130
+	; LineNumber: 132
 	; ****** Inline assembler section
 	sei	
-	; LineNumber: 131
+	; LineNumber: 133
 	; integer assignment NodeVar
 	ldy new_ad+1 ; keep
 	; Calling storevariable on generic assign expression
 	sta irq_ad
 	sty irq_ad+1
-	; LineNumber: 132
+	; LineNumber: 134
 	; ****** Inline assembler section
 	cli	
-	; LineNumber: 135
+	; LineNumber: 137
 	rts
 block1
-	; LineNumber: 143
+	; LineNumber: 145
 	; main program 
 	jsr txt_cls
-	; LineNumber: 144
+	; LineNumber: 146
 	; Assigning a string : txt_in_str
 	lda #<MainProgram_stringassignstr261
 	sta txt_in_str
@@ -2542,38 +2546,38 @@ block1
 	; Calling storevariable on generic assign expression
 	sta txt_CRLF
 	jsr txt_print_string
-	; LineNumber: 147
+	; LineNumber: 149
 	jsr init_screen
-	; LineNumber: 148
+	; LineNumber: 150
 	ldy #0   ; Force integer assignment, set y = 0 for values lower than 255
 	lda #$0
 	; Calling storevariable on generic assign expression
 	sta sx
 	sty sx+1
-	; LineNumber: 149
+	; LineNumber: 151
 	lda #$4
 	; Calling storevariable on generic assign expression
 	sta sy
 	sty sy+1
-	; LineNumber: 150
+	; LineNumber: 152
 	lda #$0
 	; Calling storevariable on generic assign expression
 	sta x
-	; LineNumber: 151
+	; LineNumber: 153
 	lda #$a
 	; Calling storevariable on generic assign expression
 	sta y
-	; LineNumber: 154
+	; LineNumber: 156
 	jsr setup_irq
-	; LineNumber: 155
+	; LineNumber: 157
 	lda #$1
 	; Calling storevariable on generic assign expression
 	sta ALIVE
-	; LineNumber: 156
+	; LineNumber: 158
 	lda #$0
 	; Calling storevariable on generic assign expression
 	sta WON_GAME
-	; LineNumber: 160
+	; LineNumber: 162
 	
 ; // Numeric Keypad
 	; Integer constant assigning
@@ -2582,25 +2586,25 @@ block1
 	; Calling storevariable on generic assign expression
 	sta n_key_up
 	sty n_key_up+1
-	; LineNumber: 161
+	; LineNumber: 163
 	; Integer constant assigning
 	lda #$05
 	; Calling storevariable on generic assign expression
 	sta n_key_down
 	sty n_key_down+1
-	; LineNumber: 162
+	; LineNumber: 164
 	; Integer constant assigning
 	lda #$04
 	; Calling storevariable on generic assign expression
 	sta n_key_left
 	sty n_key_left+1
-	; LineNumber: 163
+	; LineNumber: 165
 	; Integer constant assigning
 	ldy #$80
 	; Calling storevariable on generic assign expression
 	sta n_key_right
 	sty n_key_right+1
-	; LineNumber: 166
+	; LineNumber: 168
 	
 ; // Regular keys        
 	; Integer constant assigning
@@ -2609,25 +2613,25 @@ block1
 	; Calling storevariable on generic assign expression
 	sta key_up
 	sty key_up+1
-	; LineNumber: 167
+	; LineNumber: 169
 	; Integer constant assigning
 	lda #$05
 	; Calling storevariable on generic assign expression
 	sta key_down
 	sty key_down+1
-	; LineNumber: 168
+	; LineNumber: 170
 	; Integer constant assigning
 	lda #$04
 	; Calling storevariable on generic assign expression
 	sta key_left
 	sty key_left+1
-	; LineNumber: 169
+	; LineNumber: 171
 	; Integer constant assigning
 	ldy #$02
 	; Calling storevariable on generic assign expression
 	sta key_right
 	sty key_right+1
-	; LineNumber: 172
+	; LineNumber: 174
 	
 ; //draw_frame();
 MainProgram_while263
@@ -2648,18 +2652,18 @@ MainProgram_localsuccess411: ;keep
 MainProgram_localfailed410
 	jmp MainProgram_elsedoneblock266
 MainProgram_ConditionalTrueBlock264: ;Main true block ;keep 
-	; LineNumber: 173
-	; LineNumber: 177
+	; LineNumber: 175
+	; LineNumber: 179
 	jsr Key_Read
-	; LineNumber: 181
+	; LineNumber: 183
 	lda x
 	; Calling storevariable on generic assign expression
 	sta old_x
-	; LineNumber: 182
+	; LineNumber: 184
 	lda y
 	; Calling storevariable on generic assign expression
 	sta old_y
-	; LineNumber: 183
+	; LineNumber: 185
 	; Binary clause Simplified: NOTEQUALS
 	; Assigning to register
 	; Assigning register : _xy
@@ -2682,26 +2686,26 @@ MainProgram_localfailed440: ;keep
 	cmp #$0;keep
 	beq MainProgram_elsedoneblock416
 MainProgram_ConditionalTrueBlock414: ;Main true block ;keep 
-	; LineNumber: 184
-	; LineNumber: 185
+	; LineNumber: 186
+	; LineNumber: 187
 	; Binary clause Simplified: GREATEREQUAL
 	lda y
 	; Compare with pure num / var optimization
 	cmp #$2;keep
 	bcc MainProgram_elsedoneblock445
 MainProgram_ConditionalTrueBlock443: ;Main true block ;keep 
-	; LineNumber: 186
-	; LineNumber: 187
+	; LineNumber: 188
+	; LineNumber: 189
 	; Test Inc dec D
 	dec y
-	; LineNumber: 188
+	; LineNumber: 190
 	; Binary clause Simplified: LESS
 	lda y
 	; Compare with pure num / var optimization
 	cmp #$5;keep
 	bcs MainProgram_elsedoneblock459
 MainProgram_ConditionalTrueBlock457: ;Main true block ;keep 
-	; LineNumber: 187
+	; LineNumber: 189
 	lda sy
 	sec
 	sbc #$01
@@ -2711,11 +2715,11 @@ MainProgram_ConditionalTrueBlock457: ;Main true block ;keep
 	dec sy+1
 MainProgram_WordAdd463
 MainProgram_elsedoneblock459
-	; LineNumber: 189
+	; LineNumber: 191
 MainProgram_elsedoneblock445
-	; LineNumber: 190
-MainProgram_elsedoneblock416
 	; LineNumber: 192
+MainProgram_elsedoneblock416
+	; LineNumber: 194
 	; Binary clause Simplified: NOTEQUALS
 	; Assigning to register
 	; Assigning register : _xy
@@ -2738,23 +2742,23 @@ MainProgram_localfailed475: ;keep
 	cmp #$0;keep
 	beq MainProgram_elsedoneblock467
 MainProgram_ConditionalTrueBlock465: ;Main true block ;keep 
-	; LineNumber: 193
-	; LineNumber: 194
+	; LineNumber: 195
+	; LineNumber: 196
 	; Binary clause Simplified: LESS
 	lda x
 	; Compare with pure num / var optimization
 	cmp #$27;keep
 	bcs MainProgram_elsedoneblock480
 MainProgram_ConditionalTrueBlock478: ;Main true block ;keep 
-	; LineNumber: 195
-	; LineNumber: 196
+	; LineNumber: 197
+	; LineNumber: 198
 	; Test Inc dec D
 	inc x
-	; LineNumber: 197
+	; LineNumber: 199
 MainProgram_elsedoneblock480
-	; LineNumber: 198
-MainProgram_elsedoneblock467
 	; LineNumber: 200
+MainProgram_elsedoneblock467
+	; LineNumber: 202
 	; Binary clause Simplified: NOTEQUALS
 	; Assigning to register
 	; Assigning register : _xy
@@ -2777,26 +2781,26 @@ MainProgram_localfailed510: ;keep
 	cmp #$0;keep
 	beq MainProgram_elsedoneblock486
 MainProgram_ConditionalTrueBlock484: ;Main true block ;keep 
-	; LineNumber: 201
-	; LineNumber: 202
+	; LineNumber: 203
+	; LineNumber: 204
 	; Binary clause Simplified: LESS
 	lda y
 	; Compare with pure num / var optimization
 	cmp #$18;keep
 	bcs MainProgram_elsedoneblock515
 MainProgram_ConditionalTrueBlock513: ;Main true block ;keep 
-	; LineNumber: 203
-	; LineNumber: 204
+	; LineNumber: 205
+	; LineNumber: 206
 	; Test Inc dec D
 	inc y
-	; LineNumber: 205
+	; LineNumber: 207
 	; Binary clause Simplified: GREATEREQUAL
 	lda y
 	; Compare with pure num / var optimization
 	cmp #$10;keep
 	bcc MainProgram_elsedoneblock529
 MainProgram_ConditionalTrueBlock527: ;Main true block ;keep 
-	; LineNumber: 204
+	; LineNumber: 206
 	lda sy
 	clc
 	adc #$01
@@ -2806,11 +2810,11 @@ MainProgram_ConditionalTrueBlock527: ;Main true block ;keep
 	inc sy+1
 MainProgram_WordAdd533
 MainProgram_elsedoneblock529
-	; LineNumber: 206
-MainProgram_elsedoneblock515
-	; LineNumber: 207
-MainProgram_elsedoneblock486
 	; LineNumber: 208
+MainProgram_elsedoneblock515
+	; LineNumber: 209
+MainProgram_elsedoneblock486
+	; LineNumber: 210
 	; Binary clause Simplified: NOTEQUALS
 	; Assigning to register
 	; Assigning register : _xy
@@ -2833,27 +2837,27 @@ MainProgram_localfailed545: ;keep
 	cmp #$0;keep
 	beq MainProgram_elsedoneblock537
 MainProgram_ConditionalTrueBlock535: ;Main true block ;keep 
-	; LineNumber: 209
-	; LineNumber: 210
+	; LineNumber: 211
+	; LineNumber: 212
 	; Binary clause Simplified: GREATEREQUAL
 	lda x
 	; Compare with pure num / var optimization
 	cmp #$1;keep
 	bcc MainProgram_elsedoneblock550
 MainProgram_ConditionalTrueBlock548: ;Main true block ;keep 
-	; LineNumber: 211
-	; LineNumber: 212
+	; LineNumber: 213
+	; LineNumber: 214
 	; Test Inc dec D
 	dec x
-	; LineNumber: 213
+	; LineNumber: 215
 MainProgram_elsedoneblock550
-	; LineNumber: 214
+	; LineNumber: 216
 MainProgram_elsedoneblock537
-	; LineNumber: 219
+	; LineNumber: 221
 	jmp MainProgram_while263
 MainProgram_elsedoneblock266
 MainProgram_loopend268
-	; LineNumber: 221
+	; LineNumber: 223
 	; End of program
 	; Ending memory block
 EndBlock410
