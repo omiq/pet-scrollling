@@ -23,9 +23,9 @@ var
 	sdes: pointer;
 	ship: cstring=(
 
-,$20,$E9,$DF,$20,
-,$E9,$DA,$DA,$DF,
-,$69,$5F,$69,$5F,
+$20,$20,$E9,$DF,$20,
+$20,$E9,$DA,$DA,$DF,
+$20,$69,$5F,$69,$5F,
 );
 
 
@@ -298,20 +298,11 @@ screen_buffer: array[1000] of byte;
 		
 		
 		sdes := #screen_buffer+(y*40)+x;
-/*
-		if (sdes[5]<>$20 or sdes[45]<>$20) then begin
-			
-			ALIVE:=0;
-			WON_GAME:=0;	
-
-			
-		end;
-	*/
-		MemCpy(#ship, 0, sdes, 5 ); 
+		MemCpy(#ship, 1, sdes, 4 ); 
 		sdes := sdes+40;
-		MemCpy(#ship, 5, sdes, 5 );
+		MemCpy(#ship, 6, sdes, 4 );
 		sdes := sdes+40;
- 		MemCpy(#ship, 10, sdes, 5 ); 
+ 		MemCpy(#ship, 11, sdes, 4 ); 
 		
 
 	end;
