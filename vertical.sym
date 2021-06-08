@@ -200,7 +200,9 @@ al  $2f11 .MainProgram_localsuccess310
 al  $2f18 .MainProgram_ConditionalTrueBlock304
 al  $2f1e .MainProgram_elsedoneblock306
 al  $2f24 .MainProgram_elsedoneblock289
-al  $2f32 .end_screen_stringassignstr203
-al  $2f3b .end_screen_stringassignstr206
+al  $2f32 .end_screen_stringassignstr197
+al  $2f3b .end_screen_stringassignstr200
+al  $2f45 .end_screen_stringassignstr203
+al  $2f4e .end_screen_stringassignstr206
 al  $90 .irq_ad
 ; breakpoints

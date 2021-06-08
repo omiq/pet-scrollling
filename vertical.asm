@@ -61,9 +61,9 @@ sx	dc.w	0
 	; LineNumber: 15
 sy	dc.w	0
 	; LineNumber: 18
-des	=  $6A
+des	= $6A
 	; LineNumber: 18
-map_p	=  $6C
+map_p	= $6C
 	; LineNumber: 19
 n_key_up	dc.w	0
 	; LineNumber: 19
@@ -81,7 +81,7 @@ key_left	dc.w	0
 	; LineNumber: 19
 key_right	dc.w	0
 	; LineNumber: 23
-sdes	=  $6E
+sdes	= $6E
 	; LineNumber: 24
 ship	
 	dc.b	32, 32, 233, 223, 32, 32, 233, 218, 218
@@ -1310,7 +1310,7 @@ txt_DefineScreen_loopend17
 	;    Procedure type : User-defined procedure
 	; LineNumber: 285
 	; LineNumber: 284
-txt_temp_p	=  $70
+txt_temp_p	= $70
 	; LineNumber: 282
 txt__text_x	dc.b	0
 	; LineNumber: 282
@@ -1424,7 +1424,7 @@ txt_cursor_return
 	; LineNumber: 455
 txt_next_ch	dc.b	0
 	; LineNumber: 453
-txt_in_str	=  $70
+txt_in_str	= $70
 	; LineNumber: 453
 txt_CRLF	dc.b	$01
 txt_print_string_block35
@@ -1638,7 +1638,7 @@ draw_screen
 	; Generic 16 bit op
 	lda #<map
 	ldy #>map
-draw_screen_rightvarInteger_var69 =  $8A
+draw_screen_rightvarInteger_var69 = $8A
 	sta draw_screen_rightvarInteger_var69
 	sty draw_screen_rightvarInteger_var69+1
 	; Right is PURE NUMERIC : Is word =1
@@ -2378,13 +2378,13 @@ draw_ship
 	; Generic 16 bit op
 	ldy #0
 	lda x
-draw_ship_rightvarInteger_var169 =  $8A
+draw_ship_rightvarInteger_var169 = $8A
 	sta draw_ship_rightvarInteger_var169
 	sty draw_ship_rightvarInteger_var169+1
 	; Generic 16 bit op
 	lda #<screen_buffer
 	ldy #>screen_buffer
-draw_ship_rightvarInteger_var172 =  $8C
+draw_ship_rightvarInteger_var172 = $8C
 	sta draw_ship_rightvarInteger_var172
 	sty draw_ship_rightvarInteger_var172+1
 	; Right is PURE NUMERIC : Is word =1
@@ -2948,6 +2948,13 @@ MainProgram_loopend291
 	; End of program
 	; Ending memory block
 EndBlock410
-start_screen_stringassignstr189	.dc "PET-TYPE 2021",0
-end_screen_stringassignstr203	.dc "YOU WIN!",0
-end_screen_stringassignstr206	.dc "YOU LOSE!",0
+start_screen_stringassignstr189		dc.b	"PET-TYPE 2021"
+	dc.b	0
+end_screen_stringassignstr197		dc.b	"YOU WIN!"
+	dc.b	0
+end_screen_stringassignstr200		dc.b	"YOU LOSE!"
+	dc.b	0
+end_screen_stringassignstr203		dc.b	"YOU WIN!"
+	dc.b	0
+end_screen_stringassignstr206		dc.b	"YOU LOSE!"
+	dc.b	0

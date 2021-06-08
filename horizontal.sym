@@ -185,7 +185,9 @@ al  $35cf .MainProgram_localsuccess397
 al  $35d6 .MainProgram_ConditionalTrueBlock391
 al  $35dc .MainProgram_elsedoneblock393
 al  $35e2 .MainProgram_elsedoneblock376
-al  $35f0 .end_screen_stringassignstr226
-al  $35f9 .end_screen_stringassignstr229
+al  $35f0 .end_screen_stringassignstr220
+al  $35f9 .end_screen_stringassignstr223
+al  $3603 .end_screen_stringassignstr226
+al  $360c .end_screen_stringassignstr229
 al  $90 .irq_ad
 ; breakpoints

@@ -63,9 +63,9 @@ sx	dc.w	0
 	; LineNumber: 15
 sy	dc.w	0
 	; LineNumber: 18
-des	=   $6A
+des	= $6A
 	; LineNumber: 18
-map_p	=   $6C
+map_p	= $6C
 	; LineNumber: 19
 n_key_up	dc.w	0
 	; LineNumber: 19
@@ -83,7 +83,7 @@ key_left	dc.w	0
 	; LineNumber: 19
 key_right	dc.w	0
 	; LineNumber: 23
-sdes	=   $6E
+sdes	= $6E
 	; LineNumber: 24
 ship	
 	dc.b	124, 251, 236, 98, 123, 32, 251, 236, 252
@@ -1512,7 +1512,7 @@ txt_DefineScreen_loopend17
 	;    Procedure type : User-defined procedure
 	; LineNumber: 285
 	; LineNumber: 284
-txt_temp_p	=   $70
+txt_temp_p	= $70
 	; LineNumber: 282
 txt__text_x	dc.b	0
 	; LineNumber: 282
@@ -1626,7 +1626,7 @@ txt_cursor_return
 	; LineNumber: 455
 txt_next_ch	dc.b	0
 	; LineNumber: 453
-txt_in_str	=   $70
+txt_in_str	= $70
 	; LineNumber: 453
 txt_CRLF	dc.b	$01
 txt_print_string_block35
@@ -2535,13 +2535,13 @@ draw_ship
 	; Generic 16 bit op
 	ldy #0
 	lda x
-draw_ship_rightvarInteger_var167 =   $8A
+draw_ship_rightvarInteger_var167 = $8A
 	sta draw_ship_rightvarInteger_var167
 	sty draw_ship_rightvarInteger_var167+1
 	; Generic 16 bit op
 	lda #<screen_buffer
 	ldy #>screen_buffer
-draw_ship_rightvarInteger_var170 =   $8C
+draw_ship_rightvarInteger_var170 = $8C
 	sta draw_ship_rightvarInteger_var170
 	sty draw_ship_rightvarInteger_var170+1
 	; Right is PURE NUMERIC : Is word =1
@@ -2670,7 +2670,7 @@ draw_frame_incmax184
 	; Binary clause Simplified: EQUALS
 	; Modulo
 	lda #$5
-draw_frame_val_var199 =   $8A
+draw_frame_val_var199 = $8A
 	sta draw_frame_val_var199
 	lda ticks
 	sec
@@ -3195,6 +3195,13 @@ MainProgram_loopend378
 	; End of program
 	; Ending memory block
 EndBlock410
-start_screen_stringassignstr212	.dc "PET-TYPE 2021",0
-end_screen_stringassignstr226	.dc "YOU WIN!",0
-end_screen_stringassignstr229	.dc "YOU LOSE!",0
+start_screen_stringassignstr212		dc.b	"PET-TYPE 2021"
+	dc.b	0
+end_screen_stringassignstr220		dc.b	"YOU WIN!"
+	dc.b	0
+end_screen_stringassignstr223		dc.b	"YOU LOSE!"
+	dc.b	0
+end_screen_stringassignstr226		dc.b	"YOU WIN!"
+	dc.b	0
+end_screen_stringassignstr229		dc.b	"YOU LOSE!"
+	dc.b	0
