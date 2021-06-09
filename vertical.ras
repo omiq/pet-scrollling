@@ -240,8 +240,8 @@ screen_buffer: array[1000] of byte;
 	procedure init_screen();
 	begin
 		map_p:=#map;
-		fill( #screen_buffer, 0, 255 );		
-		CopyFullScreen(#screen_buffer, ^$8000);
+		ClearScreen(32, SCREEN_CHAR_LOC);	
+		CopyFullScreen(SCREEN_CHAR_LOC, #screen_buffer);	
 	end;
 	
 
@@ -310,11 +310,8 @@ screen_buffer: array[1000] of byte;
 	procedure draw_frame();
 	begin	
 
-	//	incrange(ticks,0,100);
-	
-		// This will run approx 60hz so we need to figure out vertical blank
-		// Bit 5 is high when vertical retrace in effect
-//		if mod(ticks,5)=0 then begin 
+		incrange(ticks,0,100);
+		if mod(ticks,5)=0 then begin 
 			
 			//incrange(sx,0,400);
 			dec(sy);
@@ -323,7 +320,7 @@ screen_buffer: array[1000] of byte;
 			draw_screen();	
 			draw_ship();	
 			CopyFullScreen(#screen_buffer, ^$8000);	
-//		end;
+		end;
 	
 		
 	end;
@@ -351,7 +348,7 @@ screen_buffer: array[1000] of byte;
 	
 		txt::cls();
 		txt::move_to(10,10);
-		txt::print_string("PET-TYPE 2021", False);
+		txt::print_string("PET-BLAST 2021", False);
 	
 		txt::clear_buffer();
 		txt::wait_key();
@@ -444,7 +441,7 @@ screen_buffer: array[1000] of byte;
         
         if(Key::Pressed(key_down) or Key::Pressed(n_key_down)) then
         begin
-            if(y<24) then
+            if(y<21) then
             begin
                 inc(y);
             end;

@@ -1804,29 +1804,36 @@ init_screen
 	sta map_p
 	stx map_p+1
 	; LineNumber: 63
-	lda #$0
-	ldx #0
-init_screen_fill63
-	sta screen_buffer,x
-	inx
-	cpx #$ff
-	bne init_screen_fill63
-	; LineNumber: 65
+	; Clear screen with offset
+	lda #$20
+	ldx #$fa
+init_screen_clearloop63
+	dex
+	sta $0000+$8000,x
+	sta $00fa+$8000,x
+	sta $01f4+$8000,x
+	sta $02ee+$8000,x
+	sta $03e8+$8000,x
+	sta $04e2+$8000,x
+	sta $05dc+$8000,x
+	sta $06d6+$8000,x
+	bne init_screen_clearloop63
+	; LineNumber: 64
 	; Copy full screen
 	ldx #0
 init_screen_fullcopyloop64
-	lda screen_buffer + $0,x
-	sta $8000 + $0,x
-	lda screen_buffer + $100,x
-	sta $8000 + $100,x
-	lda screen_buffer + $200,x
-	sta $8000 + $200,x
+	lda $8000 + $0,x
+	sta screen_buffer + $0,x
+	lda $8000 + $100,x
+	sta screen_buffer + $100,x
+	lda $8000 + $200,x
+	sta screen_buffer + $200,x
 	dex
 	bne init_screen_fullcopyloop64
 	ldx #232
 init_screen_fullcopyloop265
-	lda screen_buffer + $2ff,x
-	sta $8000 + $2ff,x
+	lda $8000 + $2ff,x
+	sta screen_buffer + $2ff,x
 	dex
 	bne init_screen_fullcopyloop265
 	; LineNumber: 66
